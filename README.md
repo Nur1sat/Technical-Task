@@ -67,6 +67,12 @@ Swagger: `http://localhost:3000/swagger`
 - `POST /auth/refresh` — обновить пару токенов (ротация refresh)
 - `POST /auth/logout` — инвалидировать refresh токен
 
+Алиасы под базой `/users` (чтобы формально закрыть часть “авторизация/регистрация пользователя” в рамках Users):
+- `POST /users/register`
+- `POST /users/login`
+- `POST /users/refresh`
+- `POST /users/logout`
+
 ### Users
 - `POST /users` — создать пользователя (по смыслу эквивалент регистрации)
 - `GET /users/:id` — получить пользователя по id (JWT)
@@ -75,7 +81,7 @@ Swagger: `http://localhost:3000/swagger`
 - `DELETE /users/:id` — удалить (только владелец) (JWT)
 
 ### Tasks (JWT обязателен)
-- `POST /tasks` — создать задачу (только `user`)
+- `POST /tasks` — создать задачу (только `user`, `description` и `comment` обязательны)
 - `GET /tasks/:id` — получить задачу по id
 - `GET /tasks` — список задач (новые первыми)
 - `PATCH /tasks/:id` — редактировать (только владелец, только `user`)
@@ -87,6 +93,14 @@ Swagger: `http://localhost:3000/swagger`
 - `GET /comments/:id` — получить комментарий по id
 - `PATCH /comments/:id` — редактировать (только владелец)
 - `DELETE /comments/:id` — удалить (только владелец)
+
+## E2E тесты
+
+Тесты поднимают приложение in-memory и подключаются к Postgres из `docker-compose.yml`.
+```bash
+docker compose up -d
+npm run test:e2e
+```
 
 ## Примечания по моделям
 
