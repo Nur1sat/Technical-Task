@@ -12,9 +12,10 @@
     "tmp": "^0.2.4"
   },
   "scripts": {
+    "clean": "node -e \"const fs=require('fs'); for (const p of ['dist','tsconfig.tsbuildinfo','tsconfig.build.tsbuildinfo']) fs.rmSync(p,{recursive:true,force:true});\"",
     "start": "node dist/main.js",
     "dev": "npm run start:dev",
-    "start:dev": "nest start --watch",
+    "start:dev": "npm run clean && nest start --watch",
     "build": "nest build",
     "lint": "eslint .",
     "format": "prettier --write .",
